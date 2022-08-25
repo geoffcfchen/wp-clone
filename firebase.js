@@ -1,4 +1,11 @@
 import { initializeApp } from "firebase/app";
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { getStorage } from "firebase/storage";
+import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBlYEAHVWYmDghYf1sHWap9c8UFAKlSYNc",
@@ -10,4 +17,15 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+export const app = initializeApp(firebaseConfig);
+export const auth = getAuth(app);
+export const storage = getStorage(app);
+export const db = getFirestore(app);
+
+export function singIn(email, password) {
+  return signInWithEmailAndPassword(auth, email, password);
+}
+
+export function singUp(email, password) {
+  return createUserWithEmailAndPassword(auth, email, password);
+}
