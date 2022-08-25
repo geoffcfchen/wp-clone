@@ -2,11 +2,23 @@ import { StatusBar } from "expo-status-bar";
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { useAssets } from "expo-asset";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./firebase";
 
 function App() {
   const [currUser, setCurrUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  useEffect(() => {});
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setLoading(false);
+      if (user) {
+        setCurrUser(user);
+      }
+    });
+    return () => unsubscribe();
+  });
+
   return (
     <View style={styles.container}>
       <Text>test!</Text>
