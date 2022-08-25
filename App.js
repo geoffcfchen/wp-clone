@@ -1,11 +1,12 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { useAssets } from "expo-asset";
 
-export default function App() {
+function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <Text>test!</Text>
       <StatusBar style="auto" />
     </View>
   );
@@ -19,3 +20,18 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
+
+function Main() {
+  const [assets] = useAssets(
+    require("./assets/icon-square.png"),
+    require("./assets/chatbg.png"),
+    require("./assets/user-icon.png"),
+    require("./assets/welcome-img.png")
+  );
+  if (!assets) {
+    return <Text>Loading ..</Text>;
+  }
+  return <App></App>;
+}
+
+export default Main;
