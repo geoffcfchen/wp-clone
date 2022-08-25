@@ -1,9 +1,12 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { useAssets } from "expo-asset";
 
 function App() {
+  const [currUser, setCurrUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {});
   return (
     <View style={styles.container}>
       <Text>test!</Text>
