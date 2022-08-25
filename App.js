@@ -1,15 +1,19 @@
-import { StatusBar } from "expo-status-bar";
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, LogBox } from "react-native";
+import { Text, View, LogBox } from "react-native";
 import { useAssets } from "expo-asset";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import SignIn from "./screens/SignIn";
 
 // this is the long issue for the firestore
 LogBox.ignoreLogs([
   "Setting a timer",
   "AsyncStorage has been extracted from react-native core and will be removed in a future release.",
 ]);
+
+const Stack = createStackNavigator();
 
 function App() {
   const [currUser, setCurrUser] = useState(null);
@@ -30,21 +34,17 @@ function App() {
   }
 
   return (
-    <View style={styles.container}>
-      <Text>{JSON.stringify(currUser)}</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      {!currUser ? (
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="signIn" component={SignIn}></Stack.Screen>
+        </Stack.Navigator>
+      ) : (
+        <Text>Hi user!</Text>
+      )}
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
 
 function Main() {
   const [assets] = useAssets(
