@@ -42,6 +42,8 @@ export default function SignIn() {
       ></Image>
       <View style={{ marginTop: 20 }}>
         <TextInput
+          autoCapitalize="none"
+          autoFocus
           value={email}
           onChangeText={setEmail}
           placeholder="Email"

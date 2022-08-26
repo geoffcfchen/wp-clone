@@ -35,7 +35,8 @@ export async function uploadImage(uri, path, fName) {
   const snapshot = await uploadBytes(imageRef, blob, {
     contentType: "image/jpeg",
   });
-
+  // clear blob object
+  // for (var member in blob) delete blob[member];
   blob.close();
 
   const url = await getDownloadURL(snapshot.ref);
