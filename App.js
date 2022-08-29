@@ -13,6 +13,7 @@ import Profile from "./screens/Profile";
 import Chats from "./screens/Chats";
 import Photo from "./screens/Photo";
 import { Ionicons } from "@expo/vector-icons";
+import Contacts from "./screens/Contacts";
 
 // this is the long issue for the firestore
 LogBox.ignoreLogs([
@@ -72,6 +73,11 @@ function App() {
             name="home"
             options={{ title: "Whatsapp" }}
             component={Home}
+          ></Stack.Screen>
+          <Stack.Screen
+            name="contacts"
+            options={{ title: "Select Contacts" }}
+            component={Contacts}
           ></Stack.Screen>
         </Stack.Navigator>
       )}
