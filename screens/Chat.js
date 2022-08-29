@@ -1,19 +1,22 @@
 // @refresh reset
-import { View, Text } from "react-native";
+import { View, Text, ImageBackground } from "react-native";
 import "react-native-get-random-values";
 import { nanoid } from "nanoid";
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect, useCallback } from "react";
 import { auth, db } from "../firebase";
 import { useRoute } from "@react-navigation/native";
 import GlobalContext from "../context/Context";
 import { collection } from "firebase/firestore";
 import { doc } from "firebase/firestore";
-import { useEffect } from "react";
 import { setDoc } from "firebase/firestore";
+import { onSnapshot } from "firebase/firestore";
+import { GiftedChat } from "react-native-gifted-chat";
 
 const randomID = nanoid();
 
 export default function Chat() {
+  const [roomHash, setRoomHash] = useState("");
+  const [messages, setMessages] = useState([]);
   const {
     theme: { colors },
   } = useContext(GlobalContext);
@@ -63,12 +66,41 @@ export default function Chat() {
           console.log(error);
         }
       }
+      const emailHash = `${currentUser.email}:${userB.email}:`;
+      setRoomHash(emailHash);
     })();
   }, []);
 
+  useEffect(() => {
+    const unsubscribe = onSnapshot(roomMessagesRef, (querySnapshot) => {
+      const messagesFirestore = querySnapshot
+        .docChanges()
+        .filter(({ type }) => type === "added")
+        .map(({ doc }) => {
+          const message = doc.data();
+          return { ...message, createdAt: message.createdAt.toDate() };
+        });
+      appendMessages(messages);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  const appendMessages = useCallback(
+    (messages) => {
+      setMessages((previousMessages) =>
+        GiftedChat.append(previousMessages, messages)
+      );
+    },
+    [messages]
+  );
+
   return (
-    <View>
-      <Text>Chat</Text>
-    </View>
+    <ImageBackground
+      resizeMode="cover"
+      source={require("../assets/chatbg.png")}
+      style={{ flex: 1 }}
+    >
+      <GiftedChat></GiftedChat>
+    </ImageBackground>
   );
 }
