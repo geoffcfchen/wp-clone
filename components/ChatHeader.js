@@ -3,7 +3,6 @@ import React, { useContext } from "react";
 import Avatar from "./Avatar";
 import { useRoute } from "@react-navigation/native";
 import GlobalContext from "../context/Context";
-import { Colors } from "react-native/Libraries/NewAppScreen";
 
 export default function ChatHeader() {
   const route = useRoute();
