@@ -86,6 +86,9 @@ export default function Chat() {
       }
       const emailHash = `${currentUser.email}:${userB.email}:`;
       setRoomHash(emailHash);
+      if (selectedImage && selectedImage.uri) {
+        await sendImage(selectedImage.uri, emailHash);
+      }
     })();
   }, []);
 
@@ -192,11 +195,14 @@ export default function Chat() {
               }}
               onPress={() => {
                 if (text && onSend) {
-                  onSend({
-                    text: text.trim(),
-                    user,
-                    _id: messageIDGenerator(),
-                  });
+                  onSend(
+                    {
+                      text: text.trim(),
+                      user,
+                      _id: messageIDGenerator,
+                    },
+                    true
+                  );
                 }
               }}
             >
