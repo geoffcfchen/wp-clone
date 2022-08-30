@@ -6,10 +6,14 @@ import React, { useContext, useState, useEffect, useCallback } from "react";
 import { auth, db } from "../firebase";
 import { useRoute } from "@react-navigation/native";
 import GlobalContext from "../context/Context";
-import { collection } from "firebase/firestore";
-import { doc } from "firebase/firestore";
-import { setDoc } from "firebase/firestore";
-import { onSnapshot } from "firebase/firestore";
+import {
+  onSnapshot,
+  doc,
+  collection,
+  updateDoc,
+  setDoc,
+  addDoc,
+} from "firebase/firestore";
 import { GiftedChat } from "react-native-gifted-chat";
 
 const randomID = nanoid();
@@ -37,8 +41,7 @@ export default function Chat() {
   const roomID = room ? room.id : randomID;
 
   const roomRef = doc(db, "rooms", roomID);
-  const roomMessagesRef = collection(db, "room", roomID, "messages");
-
+  const roomMessagesRef = collection(db, "rooms", roomID, "messages");
   useEffect(() => {
     (async () => {
       if (!room) {
@@ -51,7 +54,7 @@ export default function Chat() {
         }
         const userBData = {
           displayName: userB.contactName || userB.displayName || "",
-          email: currentUser.email,
+          email: userB.email,
         };
         if (userB.photoURL) {
           userBData.photoURL = userB.photoURL;
@@ -80,7 +83,7 @@ export default function Chat() {
           const message = doc.data();
           return { ...message, createdAt: message.createdAt.toDate() };
         });
-      appendMessages(messages);
+      appendMessages(messagesFirestore);
     });
     return () => unsubscribe();
   }, []);
@@ -94,13 +97,25 @@ export default function Chat() {
     [messages]
   );
 
+  async function onSend(messages = []) {
+    const writes = messages.map((m) => addDoc(roomMessagesRef, m));
+    const lastMessage = messages[messages.length - 1];
+    writes.push(updateDoc(roomRef, { lastMessage }));
+    await Promise.all(writes);
+  }
+
   return (
     <ImageBackground
       resizeMode="cover"
       source={require("../assets/chatbg.png")}
       style={{ flex: 1 }}
     >
-      <GiftedChat></GiftedChat>
+      <GiftedChat
+        onSend={onSend}
+        messages={messages}
+        user={senderUser}
+        renderAvatar={null}
+      ></GiftedChat>
     </ImageBackground>
   );
 }

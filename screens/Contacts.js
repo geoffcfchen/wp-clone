@@ -24,8 +24,10 @@ export default function Contacts() {
 }
 
 function ContactPreview({ contact, image }) {
-  const { rooms } = useContext(GlobalContext);
+  const { unfilteredRooms, rooms } = useContext(GlobalContext);
   const [user, setUser] = useState(contact);
+  // useEffect(() => console.log(unfilteredRooms), [unfilteredRooms]);
+  // useEffect(() => console.log(rooms), [rooms]);
   useEffect(() => {
     const q = query(
       collection(db, "users"),
@@ -45,7 +47,7 @@ function ContactPreview({ contact, image }) {
       type="contacts"
       user={user}
       image={image}
-      room={rooms.find((room) =>
+      room={unfilteredRooms.find((room) =>
         room.participantsArray.includes(contact.email)
       )}
     ></ListItem>
