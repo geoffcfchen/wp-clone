@@ -73,7 +73,7 @@ function App() {
           )}
           <Stack.Screen
             name="home"
-            options={{ title: "Whatsapp" }}
+            options={{ title: "DoctorSay" }}
             component={Home}
           ></Stack.Screen>
           <Stack.Screen
