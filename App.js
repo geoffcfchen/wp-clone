@@ -20,6 +20,7 @@ import { AntDesign, Ionicons } from "@expo/vector-icons";
 import Contacts from "./screens/Contacts";
 import Chat from "./screens/Chat";
 import ChatHeader from "./components/ChatHeader";
+// test information
 
 // this is the long issue for the firestore
 LogBox.ignoreLogs([
