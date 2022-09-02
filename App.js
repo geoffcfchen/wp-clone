@@ -7,6 +7,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import ContextWrapper from "./context/ContextWrapper";
 import Context from "./context/Context";
 import SigninScreen from "./screens/SigninScreen";
+import HomeScreen from "./screens/HomeScreen";
 
 LogBox.ignoreLogs([
   "Setting a timer",
@@ -20,6 +21,7 @@ function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Signin" component={SigninScreen}></Stack.Screen>
+        <Stack.Screen name="Home" component={HomeScreen}></Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );
