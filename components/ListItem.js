@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import { useNavigation } from "@react-navigation/native";
 import GlobalContext from "../context/Context";
 import { Grid, Row, Col } from "react-native-easy-grid";
-import Avatar from "./Avatar";
+import AvatarCompo from "./AvatarCompo";
 export default function ListItem({
   type,
   description,
@@ -26,7 +26,10 @@ export default function ListItem({
         <Col
           style={{ width: 80, alignItems: "center", justifyContent: "center" }}
         >
-          <Avatar user={user} size={type === "contacts" ? 40 : 65}></Avatar>
+          <AvatarCompo
+            user={user}
+            size={type === "contacts" ? 40 : 65}
+          ></AvatarCompo>
         </Col>
         <Col style={{ marginLeft: 10 }}>
           <Row style={{ alignItems: "center" }}>

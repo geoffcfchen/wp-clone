@@ -1,6 +1,6 @@
 import { View, Text } from "react-native";
 import React, { useContext } from "react";
-import Avatar from "./Avatar";
+import AvatarCompo from "./AvatarCompo";
 import { useRoute } from "@react-navigation/native";
 import GlobalContext from "../context/Context";
 
@@ -12,7 +12,7 @@ export default function ChatHeader() {
   return (
     <View style={{ flexDirection: "row" }}>
       <View>
-        <Avatar size={40} user={route.params.user}></Avatar>
+        <AvatarCompo size={40} user={route.params.user}></AvatarCompo>
       </View>
       <View
         style={{

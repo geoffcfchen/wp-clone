@@ -1,9 +1,13 @@
-import React, { useState, useEffect, useContext } from "react";
-import { Text, View, LogBox } from "react-native";
+import React, { useState, useEffect, useContext, useLayoutEffect } from "react";
+import { Text, View, LogBox, TouchableOpacity, Button } from "react-native";
 import { useAssets } from "expo-asset";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
-import { NavigationContainer } from "@react-navigation/native";
+import {
+  NavigationContainer,
+  useNavigation,
+  useRoute,
+} from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import SignIn from "./screens/SignIn";
@@ -12,7 +16,7 @@ import Context from "./context/Context";
 import Profile from "./screens/Profile";
 import Chats from "./screens/Chats";
 import Photo from "./screens/Photo";
-import { Ionicons } from "@expo/vector-icons";
+import { AntDesign, Ionicons } from "@expo/vector-icons";
 import Contacts from "./screens/Contacts";
 import Chat from "./screens/Chat";
 import ChatHeader from "./components/ChatHeader";
@@ -41,7 +45,7 @@ function App() {
       }
     });
     return () => unsubscribe();
-  });
+  }, []);
 
   if (loading) {
     return <Text>Loading</Text>;
@@ -71,11 +75,7 @@ function App() {
               options={{ headerShown: false }}
             ></Stack.Screen>
           )}
-          <Stack.Screen
-            name="home"
-            options={{ title: "DoctorSay" }}
-            component={Home}
-          ></Stack.Screen>
+          <Stack.Screen name="home" component={Home}></Stack.Screen>
           <Stack.Screen
             name="contacts"
             options={{ title: "Select Contacts" }}
@@ -98,6 +98,28 @@ function Home() {
   const {
     theme: { colors },
   } = useContext(Context);
+  const navigation = useNavigation();
+
+  const signOutUser = () => {
+    console.log(auth);
+    // auth.signOut().then(() => {
+    //   console.log(auth);
+    // });
+  };
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      title: "Furry",
+      headerLeft: () => (
+        <View style={{ marginLeft: 20 }}>
+          <TouchableOpacity onPress={signOutUser} activeOpacity={0.5}>
+            <Text style={{ color: colors.white }}>Log Out</Text>
+          </TouchableOpacity>
+        </View>
+      ),
+    });
+  }, [navigation]);
+
   return (
     <Tab.Navigator
       screenOptions={({ route }) => {

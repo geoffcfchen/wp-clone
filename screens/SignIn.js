@@ -1,4 +1,11 @@
-import { View, Text, Image, TextInput, Button } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  TextInput,
+  Button,
+  KeyboardAvoidingView,
+} from "react-native";
 import React, { useContext, useState } from "react";
 import Context from "../context/Context";
 import { async } from "../utils";
@@ -22,18 +29,20 @@ export default function SignIn() {
   }
 
   return (
-    <View
+    <KeyboardAvoidingView
+      behavior="padding"
       style={{
         justifyContent: "center",
         alignItems: "center",
         flex: 1,
+        padding: 10,
         backgroundColor: colors.white,
       }}
     >
       <Text
         style={{ color: colors.foreground, fontSize: 24, marginBottom: 20 }}
       >
-        Welcome to whatsapp
+        Welcome to Furry
       </Text>
       <Image
         source={require("../assets/welcome-img.png")}
@@ -86,6 +95,6 @@ export default function SignIn() {
           </Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 }
