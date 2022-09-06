@@ -8,7 +8,7 @@ import ContextWrapper from "./context/ContextWrapper";
 import Context from "./context/Context";
 import SigninScreen from "./screens/SigninScreen";
 import HomeScreen from "./screens/HomeScreen";
-import ProfileScreen from "./screens/PhotoScreen";
+import ProfileScreen from "./screens/ProfileScreen";
 
 LogBox.ignoreLogs([
   "Setting a timer",
@@ -21,9 +21,13 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Signin" component={SigninScreen}></Stack.Screen>
         <Stack.Screen
-          name="profile"
+          name="Signin"
+          component={SigninScreen}
+          options={{ headerShown: false }}
+        ></Stack.Screen>
+        <Stack.Screen
+          name="Profile"
           component={ProfileScreen}
           options={{ headerShown: false }}
         ></Stack.Screen>

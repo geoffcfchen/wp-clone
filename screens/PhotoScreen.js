@@ -9,7 +9,7 @@ export default function Photo() {
 
   return (
     <View>
-      <Text>Photo</Text>
+      <Text>Phtesto</Text>
     </View>
   );
 }

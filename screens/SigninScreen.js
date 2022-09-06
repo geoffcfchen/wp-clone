@@ -6,11 +6,11 @@ import {
   TextInput,
   Button,
   KeyboardAvoidingView,
+  TouchableOpacity,
 } from "react-native";
 import Context from "../context/Context";
 import React, { useContext, useState, useEffect } from "react";
 import { auth } from "../firebase";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import { signUp, signIn } from "../firebase";
 import { useNavigation } from "@react-navigation/native";
 
@@ -24,13 +24,17 @@ export default function SigninScreen() {
     theme: { colors },
   } = useContext(Context);
 
-  async function handlePress() {
-    if (mode === "signUp") {
-      await signUp(email, password);
-    }
-    if (mode === "signIn") {
-      await signIn(email, password);
-    }
+  // async function handlePress() {
+  //   if (mode === "signUp") {
+  //     await signUp(email, password);
+  //   }
+  //   if (mode === "signIn") {
+  //     await signIn(email, password);
+  //   }
+  // }
+
+  async function handlePressSignIn() {
+    await signIn(email, password);
   }
 
   useEffect(() => {
@@ -85,13 +89,18 @@ export default function SigninScreen() {
         ></TextInput>
         <View style={{ marginTop: 20 }}>
           <Button
-            title={mode === "signUp" ? "Sign up" : "Login in"}
+            title={"Login in"}
             disabled={!password || !email}
             color={colors.secondary}
-            onPress={handlePress}
+            onPress={handlePressSignIn}
+          ></Button>
+          <Button
+            title={"Register"}
+            color={colors.secondary}
+            onPress={() => navigation.navigate("Profile")}
           ></Button>
         </View>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           style={{ marginTop: 15 }}
           onPress={() =>
             mode === "signUp" ? setMode("signIn") : setMode("signUp")
@@ -102,7 +111,7 @@ export default function SigninScreen() {
               ? "Already have an account? Sign in"
               : "Don't have an account? Sign Up"}
           </Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     </KeyboardAvoidingView>
   );
