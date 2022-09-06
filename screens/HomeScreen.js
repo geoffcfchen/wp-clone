@@ -16,7 +16,7 @@ import {
 
 const Tab = createMaterialTopTabNavigator();
 
-const HomeScreen = ({ navigation, route }) => {
+const HomeScreen = ({ navigation }) => {
   const {
     theme: { colors },
   } = useContext(Context);
