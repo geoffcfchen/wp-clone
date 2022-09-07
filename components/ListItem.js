@@ -17,6 +17,7 @@ export default function ListItem({
   const {
     theme: { colors },
   } = useContext(GlobalContext);
+  // console.log(description);
   return (
     <TouchableOpacity
       style={{ height: 80, ...style }}
@@ -50,9 +51,9 @@ export default function ListItem({
           </Row>
           {description && (
             <Row style={{ marginTop: -5 }}>
-              <Text
-                style={{ color: colors.secondaryText, fontSize: 13 }}
-              ></Text>
+              <Text style={{ color: colors.secondaryText, fontSize: 13 }}>
+                {description}
+              </Text>
             </Row>
           )}
         </Col>

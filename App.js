@@ -10,6 +10,8 @@ import SigninScreen from "./screens/SigninScreen";
 import HomeScreen from "./screens/HomeScreen";
 import ProfileScreen from "./screens/ProfileScreen";
 import ContactsScreen from "./screens/ContactsScreen";
+import ChatScreen from "./screens/ChatScreen";
+import ChatHeader from "./components/ChatHeader";
 
 LogBox.ignoreLogs([
   "Setting a timer",
@@ -33,7 +35,18 @@ function App() {
           options={{ headerShown: false }}
         ></Stack.Screen>
         <Stack.Screen name="Home" component={HomeScreen}></Stack.Screen>
-        <Stack.Screen name="Contacts" component={ContactsScreen}></Stack.Screen>
+        <Stack.Screen
+          name="Contacts"
+          component={ContactsScreen}
+          options={{ title: "Select Contacts" }}
+        ></Stack.Screen>
+        <Stack.Screen
+          name="chat" // find the way to make it Capitalized
+          component={ChatScreen}
+          options={{
+            headerTitle: (props) => <ChatHeader {...props}></ChatHeader>,
+          }}
+        ></Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );

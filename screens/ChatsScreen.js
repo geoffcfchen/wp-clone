@@ -40,7 +40,7 @@ export default function Chats() {
     }
     return user;
   }
-
+  // console.log(rooms);
   return (
     <View style={{ flex: 1, padding: 5, paddingRight: 10 }}>
       {rooms.map((room) => (
