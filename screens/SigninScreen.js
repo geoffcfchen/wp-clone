@@ -53,7 +53,7 @@ export default function SigninScreen() {
       <Text
         style={{ color: colors.foreground, fontSize: 24, marginBottom: 20 }}
       >
-        Welcome to Furry
+        Welcome to Furby
       </Text>
       <Image
         source={require("../assets/welcome-img.png")}

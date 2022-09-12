@@ -29,7 +29,7 @@ const HomeScreen = ({ navigation }) => {
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      title: "Furry",
+      title: "Furby",
       headerLeft: () => (
         <View style={{ marginLeft: 20 }}>
           <TouchableOpacity onPress={signOutUser} activeOpacity={0.5}>
