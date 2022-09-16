@@ -56,7 +56,7 @@ export default function SigninScreen() {
         Welcome to Furby
       </Text>
       <Image
-        source={require("../assets/welcome-img.png")}
+        source={require("../assets/welcome-img2.png")}
         style={{ width: 180, height: 180 }}
         resizeMode="cover"
       ></Image>

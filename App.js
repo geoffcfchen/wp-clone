@@ -66,7 +66,7 @@ function Main() {
     require("./assets/icon-square.png"),
     require("./assets/chatbg.png"),
     require("./assets/user-icon.png"),
-    require("./assets/welcome-img.png")
+    require("./assets/welcome-img2.png")
   );
   if (!assets) {
     return <Text>Loading ..</Text>;
