@@ -63,7 +63,7 @@ export default function ProfileScreen() {
     }
     await Promise.all([
       updateProfile(user, userData),
-      setDoc(doc(db, "users", user.uid), { ...userData, uid: user.uid }),
+      setDoc(doc(db, "customers", user.uid), { ...userData, uid: user.uid }),
     ]);
     console.log("updated user", user);
     navigation.replace("Home");

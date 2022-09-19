@@ -12,6 +12,7 @@ import ProfileScreen from "./screens/ProfileScreen";
 import ContactsScreen from "./screens/ContactsScreen";
 import ChatScreen from "./screens/ChatScreen";
 import ChatHeader from "./components/ChatHeader";
+import PlansScreen from "./screens/PlansScreen";
 
 LogBox.ignoreLogs([
   "Setting a timer",
@@ -39,6 +40,11 @@ function App() {
           name="Contacts"
           component={ContactsScreen}
           options={{ title: "Select Contacts" }}
+        ></Stack.Screen>
+        <Stack.Screen
+          name="Plans"
+          component={PlansScreen}
+          options={{ title: "Plans" }}
         ></Stack.Screen>
         <Stack.Screen
           name="chat" // find the way to make it Capitalized

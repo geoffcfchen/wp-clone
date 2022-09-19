@@ -13,13 +13,16 @@ import {
   Entypo,
   SimpleLineIcons,
 } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 const Tab = createMaterialTopTabNavigator();
 
-const HomeScreen = ({ navigation }) => {
+const HomeScreen = () => {
   const {
     theme: { colors },
   } = useContext(Context);
+
+  const navigation = useNavigation();
 
   const signOutUser = () => {
     auth.signOut().then(() => {
@@ -29,10 +32,20 @@ const HomeScreen = ({ navigation }) => {
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      title: "Furby",
+      title: "Vetcation",
       headerLeft: () => (
         <View style={{ marginLeft: 20 }}>
           <TouchableOpacity onPress={signOutUser} activeOpacity={0.5}>
+            <SimpleLineIcons name="logout" size={24} color="black" />
+          </TouchableOpacity>
+        </View>
+      ),
+      headerRight: () => (
+        <View style={{ marginRight: 20 }}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Plans")}
+            activeOpacity={0.5}
+          >
             <SimpleLineIcons name="logout" size={24} color="black" />
           </TouchableOpacity>
         </View>

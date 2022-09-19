@@ -29,7 +29,7 @@ export default function () {
     // useEffect(() => console.log(rooms), [rooms]);
     useEffect(() => {
       const q = query(
-        collection(db, "users"),
+        collection(db, "customers"),
         where("email", "===", contact.email)
       );
       const unsubscribe = onSnapshot(q, (snapshot) => {
