@@ -30,8 +30,8 @@ function ContactPreview({ contact, image }) {
   // useEffect(() => console.log(rooms), [rooms]);
   useEffect(() => {
     const q = query(
-      collection(db, "users"),
-      where("email", "===", contact.email)
+      collection(db, "customers"),
+      where("email", "==", contact.email)
     );
     const unsubscribe = onSnapshot(q, (snapshot) => {
       if (snapshot.docs.length) {
