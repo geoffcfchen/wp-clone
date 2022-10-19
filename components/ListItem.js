@@ -50,9 +50,9 @@ export default function ListItem({
           </Row>
           {description && (
             <Row style={{ marginTop: -5 }}>
-              <Text
-                style={{ color: colors.secondaryText, fontSize: 13 }}
-              ></Text>
+              <Text style={{ color: colors.secondaryText, fontSize: 13 }}>
+                {description}
+              </Text>
             </Row>
           )}
         </Col>
